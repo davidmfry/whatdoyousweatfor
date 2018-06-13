@@ -36,28 +36,7 @@
 
 	<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-	<script>
-	  window.fbAsyncInit = function() {
-	    FB.init({
-	      appId            : '177521976289977',
-	      autoLogAppEvents : true,
-	      xfbml            : true,
-	      version          : 'v3.0'
-	    });
 
-	    FB.getLoginStatus(function(response){
-	    	console.log(response);
-	    });
-	  };
-
-	  (function(d, s, id){
-	     var js, fjs = d.getElementsByTagName(s)[0];
-	     if (d.getElementById(id)) {return;}
-	     js = d.createElement(s); js.id = id;
-	     js.src = "https://connect.facebook.net/en_US/sdk.js";
-	     fjs.parentNode.insertBefore(js, fjs);
-	   }(document, 'script', 'facebook-jssdk'));
-	</script>
 	    
 		
 	<div class="page-wrapper">
@@ -179,6 +158,9 @@
 				</div>
 			</div>
 		</footer>
+
+		<img id="testSharingImage" src="https://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg" alt="test image" style="display: none">
+
 	</div>	
 	
 	
@@ -212,11 +194,12 @@
 			var facebook_share = $("#facebook-share");
 			var twetter_share = $("#twetter-share");
 			var pinterest_share = $("#pinterest-share");
+			var base_url = "<?=base_url()?>";
+			var share_url = "";
 
 			facebook_share.hide();
 			twetter_share.hide();
 			pinterest_share.hide();
-
 			text_for_sweat.keyup(function(){
 				var text = $(this).val();
 				console.log(text);
@@ -231,36 +214,28 @@
 					// $(this).css('background', 'trasparent');
 				}
 			});
-
 			text_for_sweat.focus(function() {
 			  var text = $(this).val();
 			  if(text == "")
 			  {
-
 			  }else{
 			  	$(this).css('background', 'trasparent!important');
 			  }
 			});
-
 			text_for_sweat.focusout(function() {
 			  var text = $(this).val();
 			  if(text == "")
 			  {
-
 			  }else{
 			  	$(this).css('background', 'trasparent!important');
 			  }
 			});
-
 			$("#add-photo-btn").click(function(){
 				file_input.trigger('click');
 			});
-
 			function readURL(input) {
-
 			  if (input.files && input.files[0]) {
 			    var reader = new FileReader();
-
 			    reader.onload = function(e) {
 			      image_pre_img.attr('src', e.target.result);
 			      addphoto_tool.hide();
@@ -271,32 +246,27 @@
 			      image_pre_img.css("cursor", "move");
 			      isweatfor_title.show();
 			    }
-
 			    reader.readAsDataURL(input.files[0]);
 			  }
 			}
-
 			file_input.change(function() {
 			  readURL(this);
 			});
-
 			download_btn.click(function(){
 				html2canvas(document.querySelector("#image-pre-content")).then(function(canvas) {
-				    var ua = window.navigator.userAgent;
-	 
-	                if (ua.indexOf("Chrome") > 0) {
-	                    var link = document.createElement('a');
-	                    link.download = "test.png";
-	                    link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");;
-	                    link.click();
-	                }
-	                else {
-	                    alert("Please use Chrome");
-	                }
-
+				    var ua = window.navigator.userAgent;
+	 
+	                if (ua.indexOf("Chrome") > 0) {
+	                    var link = document.createElement('a');
+	                    link.download = "test.png";
+	                    link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");;
+	                    link.click();
+	                }
+	                else {
+	                    alert("Please use Chrome");
+	                }
 				});
 			});
-
 			share_btn.click(function(){
 				isShare = !isShare;
 				if(isShare)
@@ -309,36 +279,67 @@
 					twetter_share.hide();
 					pinterest_share.hide();
 				}else{
-					share_btn_share.hide();
-					share_btn_close.show();
-					start_over_btn.hide();
-					download_btn.hide();
-					facebook_share.show();
-					twetter_share.show();
-					pinterest_share.show();
+					html2canvas(document.querySelector("#image-pre-content")).then(function(canvas) {
+					     
+					      var dataURL = canvas.toDataURL();
+					      $.ajax({
+					         type: "POST", 
+					         url: "<?=base_url()?>upload.php", 
+					         data: { img: dataURL },
+					         dataType: 'json' 
+					      }).done(function(msg){ 
+					         // alert(msg); 
+					         if(msg.success)
+					         {
+					         	// alert(msg.url);
+					         	share_url =  base_url + msg.url;
+					         	share_btn_share.hide();
+								share_btn_close.show();
+								start_over_btn.hide();
+								download_btn.hide();
+								facebook_share.show();
+								twetter_share.show();
+								pinterest_share.show();
+					         }
+					      });
+
+					});
+				 
+					
 				}
 			});
-
-			facebook_share.click(function(){
-				FB.login(function(response){
-					if(response.status == 'connected')
-					{
-
-					}
-					else if(response.status == 'not_authorized')
-					{
-
-					}
-				},{scope:'publish_actions'});
-
-				FB.api('/me/photos','post',{url:'https://help.xyzscripts.com/wp-content/uploads/2018/03/https.png'}, function(response){
-							console.log(response);
-				})
-
-
-				
-				
+			// *** social sharing *** //
+            twetter_share.click(function(e){
+				var obj = GetImageData();
+				console.log("SharingImage = "+JSON.stringify(obj));
+				window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(obj.u), 'sharertwt', 'toolbar=0,status=0,width='+obj.w+',height='+obj.h);
 			});
+			facebook_share.click(function(e){
+				var obj = GetImageData();
+				console.log("SharingImage = "+JSON.stringify(obj));
+				
+				window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(obj.u), 'sharer', 'toolbar=0,status=0,width='+obj.w+',height='+obj.h);
+			});
+			pinterest_share.click(function(e){
+				var obj = GetImageData();
+				console.log("SharingImage = "+JSON.stringify(obj));
+				
+				window.open('http://www.pinterest.com/pin/create/button/?media=' + encodeURIComponent(obj.u), 'sharerpinterest', 'toolbar=0,status=0,width='+obj.w+',height='+obj.h);
+			});
+			function GetImageData () {
+				
+				// Here you should recieved image data.
+				// I am using some mock here, in order to test sharing functionality
+				// var IMG = document.getElementById('image-preview-img');
+				var IMG = document.getElementById('testSharingImage'); // this is image from the web, provided in the line:162
+				
+				var result = {
+					u: IMG.src,//share_url,
+					w: 500,
+					h: 500
+				};
+				return result;
+			}
 		</script>
 
 	</body>
