@@ -1,6 +1,6 @@
 <?php
  
-   $img = $_POST['img'];
+   $img = $_GET['img'];
    
    if (strpos($img, 'data:image/png;base64') === 0) {
        
@@ -25,6 +25,10 @@
          echo json_encode($return_data);
       }   
      
+   } else{
+      $return_data['success'] = false;
+         
+      echo json_encode($return_data); 
    }
  
 ?>

@@ -511,8 +511,8 @@ p {
     border-radius: 8px;
     border-bottom: 4px solid #b1182f;
     background: #f37f28;
-    background: -webkit-linear-gradient(top, #f37f28 0%, #c71730 100%);
-    background: linear-gradient(to bottom, #f37f28 0%, #c71730 100%);
+    background: -webkit-linear-gradient(top,  #af001a 0%, #de2840  100%);
+    background: linear-gradient(to bottom, #af001a 0%, #de2840  100%);
     cursor: pointer;
 }
 
@@ -559,8 +559,8 @@ p {
     border-radius: 8px;
     border-bottom: 4px solid #b1182f;
     background: #f37f28;
-    background: -webkit-linear-gradient(top, #f37f28 0%, #c71730 100%);
-    background: linear-gradient(to bottom, #f37f28 0%, #c71730 100%);
+ background: -webkit-linear-gradient(top,  #af001a 0%, #de2840  100%);
+    background: linear-gradient(to bottom, #af001a 0%, #de2840  100%);
     cursor: pointer;
 }
 

@@ -283,10 +283,14 @@
 					     
 					      var dataURL = canvas.toDataURL();
 					      $.ajax({
-					         type: "POST", 
-					         url: "<?=base_url()?>upload.php", 
+					        type: "POST", 
+					        // url: "<?=base_url()?>upload.php", 
+					         url: "http://192.71.249.78/upload.php", 
 					         data: { img: dataURL },
-					         dataType: 'json' 
+					         crossDomain: true,
+   							 dataType: 'json',
+   							 contentType: "application/json; charset=utf-8",
+
 					      }).done(function(msg){ 
 					         // alert(msg); 
 					         if(msg.success)
