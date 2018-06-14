@@ -1,6 +1,6 @@
 <?php
  
-   $img = $_GET['img'];
+   $img = $_POST['img'];
    
    if (strpos($img, 'data:image/png;base64') === 0) {
        
