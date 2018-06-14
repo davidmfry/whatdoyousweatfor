@@ -21,12 +21,14 @@
 
       } else {
          $return_data['success'] = false;
+         $return_data['msg'] = "upload error";
          
          echo json_encode($return_data);
       }   
      
    } else{
       $return_data['success'] = false;
+      $return_data['msg'] = "no image data";
          
       echo json_encode($return_data); 
    }
