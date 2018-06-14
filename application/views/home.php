@@ -285,11 +285,9 @@
 					      $.ajax({
 					        type: "POST", 
 					        // url: "<?=base_url()?>upload.php", 
-					         url: "http://192.71.249.78/upload.php", 
+					         url: "http://192.71.249.78/whatdoyousweatfor/upload.php", 
 					         data: { img: dataURL },
-					         crossDomain: true,
    							 dataType: 'json',
-   							 contentType: "application/json; charset=utf-8",
 
 					      }).done(function(msg){ 
 					         // alert(msg); 
