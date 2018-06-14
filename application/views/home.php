@@ -68,6 +68,7 @@
 						  	<img src="<?=base_url()?>assets/images/sample/default.jpg" id="image-preview-img">
 						  	<div id="isweatfor-title">I SWEAT FOR</div>
 						  	<input type="text" name="" id="text-for-sweat">
+						  	<img src="<?=base_url()?>assets/images/logo_watermark.png" id="bottom-logo-mark">
 						  </div>
 
 						  <div id="image-sweat-tool">
@@ -284,8 +285,8 @@
 					      var dataURL = canvas.toDataURL();
 					      $.ajax({
 					        type: "POST", 
-					        // url: "<?=base_url()?>upload.php", 
-					         url: "http://192.71.249.78/whatdoyousweatfor/upload.php", 
+					        url: "<?=base_url()?>upload.php", 
+					        // url: "http://192.71.249.78/whatdoyousweatfor/upload.php", 
 					         data: { img: dataURL },
    							 dataType: 'json',
 
@@ -294,7 +295,7 @@
 					         if(msg.success)
 					         {
 					         	// alert(msg.url);
-					         	share_url =  "http://192.71.249.78/whatdoyousweatfor/" + msg.url;
+					         	share_url =  "<?=base_url()?>" + msg.url;
 					         	share_btn_share.hide();
 								share_btn_close.show();
 								start_over_btn.hide();
