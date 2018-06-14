@@ -294,7 +294,7 @@
 					         if(msg.success)
 					         {
 					         	// alert(msg.url);
-					         	share_url =  base_url + msg.url;
+					         	share_url =  "http://192.71.249.78/whatdoyousweatfor/" + msg.url;
 					         	share_btn_share.hide();
 								share_btn_close.show();
 								start_over_btn.hide();
@@ -336,7 +336,7 @@
 				var IMG = document.getElementById('testSharingImage'); // this is image from the web, provided in the line:162
 				
 				var result = {
-					u: IMG.src,//share_url,
+					u: share_url,//IMG.src,//
 					w: 500,
 					h: 500
 				};
