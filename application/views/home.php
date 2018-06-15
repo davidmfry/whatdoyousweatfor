@@ -65,7 +65,7 @@
 						  <!-- <label for="image-upload" id="image-label">Choose File</label>
 						  <input type="file" name="image" id="image-upload" /> -->
 						  <div id="image-pre-content">
-						  	<img src="<?=base_url()?>assets/images/sample/default.jpg" id="image-preview-img">
+						  	<img src="<?=base_url()?>assets/images/isweatforimg.jpg" id="image-preview-img">
 						  	<div id="isweatfor-title">I SWEAT FOR</div>
 						  	<input type="text" name="" id="text-for-sweat">
 						  	<img src="<?=base_url()?>assets/images/logo_watermark.png" id="bottom-logo-mark">
@@ -145,15 +145,15 @@
 			</div>
 		</section>
 		
-		
+
 		<footer class="footer-area">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 col-md-offset-3">
 						<div class="footer-link">
-							<a href="">About</a>
-							<a href="">Privacy</a>
-							<a href="">Terms</a>
+							<a href="http://www.hotfeetfitness.com/info-culture">About</a>
+							<a href="http://www.hotfeetfitness.com/legal-privacy">Privacy</a>
+							<a href="http://www.hotfeetfitness.com/legal-terms">Terms</a>
 						</div>
 					</div>
 				</div>
@@ -197,10 +197,12 @@
 			var pinterest_share = $("#pinterest-share");
 			var base_url = "<?=base_url()?>";
 			var share_url = "";
+			var bottom_logo_mark = $("#bottom-logo-mark");
 
 			facebook_share.hide();
 			twetter_share.hide();
 			pinterest_share.hide();
+			bottom_logo_mark.hide();
 			text_for_sweat.keyup(function(){
 				var text = $(this).val();
 				console.log(text);
@@ -246,6 +248,7 @@
 			      wheelzoom(document.querySelector('#image-preview-img'));
 			      image_pre_img.css("cursor", "move");
 			      isweatfor_title.show();
+			      bottom_logo_mark.show();
 			    }
 			    reader.readAsDataURL(input.files[0]);
 			  }
