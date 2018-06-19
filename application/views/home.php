@@ -95,7 +95,7 @@
 						  </div>
 						</div>
 						<div class="text-content">
-							<h2>Not a member? <br />Try Orangetheory Fitness for free. <br /><a href="">Start burning today</a></h2>
+							<h2>Not a member? <br />Try Hot Fitness for free. <br /><a href="http://www.hotfeetfitness.com">Start burning today</a></h2>
 						</div>
 					</div>
 				</div>
